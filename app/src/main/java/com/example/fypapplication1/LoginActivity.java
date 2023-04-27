@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Action bar and its title
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Login to Account");
+        actionBar.setTitle(" ");
         //Enable back button
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
@@ -60,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         notHaveAccountTv = findViewById(R.id.nothave_accountTv);
         mRecoverPassTv = findViewById(R.id.recoverPassTv);
         mLoginBtn = findViewById(R.id.loginBtn);
-        mGoogleLoginBtn = findViewById(R.id.googleLoginBtn);
 
         //Login button click
         mLoginBtn.setOnClickListener(new View.OnClickListener() {

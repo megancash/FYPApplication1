@@ -65,16 +65,6 @@
         android:text="Forgot Password?"
         android:layout_below="@id/loginBtn"/>
 
-    <!--Google sign in-->
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/googleLoginBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/recoverPassTv"
-        android:layout_alignEnd="@+id/nothave_accountTv"
-        android:layout_marginTop="62dp"
-        android:layout_marginEnd="125dp" />
 
     <TextView
         android:id="@+id/nothave_accountTv"

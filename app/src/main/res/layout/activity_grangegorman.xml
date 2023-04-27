@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:background="@drawable/home_background"
+    tools:context=".CardOptions.TransportOptions.GrangegormanActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:paddingTop="5dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="Grangegorman"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardElevation="20dp"
+        app:cardCornerRadius="20dp">
+
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/imageSlider"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:iss_period="1000"
+            app:iss_delay="1000"
+            app:iss_corner_radius="20"
+            app:iss_auto_cycle="true">
+
+        </com.denzcoskun.imageslider.ImageSlider>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cardElevation="20dp"
+        android:background="@color/teal_700"
+        android:backgroundTint="@color/teal_700"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="The University's Grangegorman Campus is located in Dublin 7, about 1 km from Dublin City Centre. The campus is surrounded to the south-east by Smithfield, to the west by Stoneybatter, north by Cabra, to the north and east by Phibsborough / Broadstone. Our Eircode is D07 H6K8.">
+        </TextView>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <EditText
+        android:id="@+id/et_userlocation"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your location"
+        android:background="@drawable/edittext_border"
+        android:padding="12dp"/>
+    <EditText
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:id="@+id/et_userdestination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Grangegorman"
+        android:padding="12dp"
+        android:background="@drawable/edittext_border"
+        android:layout_marginTop="8dp"/>
+    <Button
+        android:id="@+id/bt_track"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find Route"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

@@ -70,7 +70,7 @@ public class ProfileFragment extends Fragment {
 
     //Views from xml
     ImageView avatarTv;
-    TextView nameTv, emailTv, phoneTv;
+    TextView nameTv, emailTv, phoneTv, coursecodeTv, yearTv, aboutMeTv, dobTv;
     FloatingActionButton fab;
 
     //permissions for editing user profile picture
@@ -121,6 +121,10 @@ public class ProfileFragment extends Fragment {
         nameTv=view.findViewById(R.id.nameTv);
         emailTv=view.findViewById(R.id.emailTv);
         phoneTv=view.findViewById(R.id.phoneTv);
+        yearTv = view.findViewById(R.id.yearTV);
+        coursecodeTv=view.findViewById(R.id.coursecodeTV);
+        aboutMeTv=view.findViewById(R.id.aboutmeTV);
+        dobTv=view.findViewById(R.id.dobTV);
         fab=view.findViewById(R.id.fab);
 
         //progress dialog
@@ -139,11 +143,20 @@ public class ProfileFragment extends Fragment {
                     String email = ""+ ds.child("email").getValue();
                     String phone = ""+ ds.child("phone").getValue();
                     String image = ""+ ds.child("image").getValue();
+                    String aboutMe = ""+ ds.child("information").getValue();
+                    String year = ""+ ds.child("year").getValue();
+                    String coursecode = ""+ ds.child("coursecode").getValue();
+                    String dob = ""+ ds.child("dob").getValue();
 
                     //set data
                     nameTv.setText(name);
                     emailTv.setText(email);
                     phoneTv.setText(phone);
+                    aboutMeTv.setText(aboutMe);
+                    yearTv.setText(year);
+                    coursecodeTv.setText(coursecode);
+                    dobTv.setText(dob);
+
                     try {
                         //Set the image once recieved
                         Picasso.get().load(image).into(avatarTv);
@@ -200,7 +213,7 @@ public class ProfileFragment extends Fragment {
 
     private void editProfileDialog() {
         //Options for the dialog pop up
-        String options[] = {"Edit Profile Picture","Edit name","Edit phone Number"};
+        String options[] = {"Edit Profile Picture","Edit Name","Edit Phone Number", "Edit Date of Birth", "Edit about me Information", "Edit Course Code", "Edit College Year"};
         //Alert dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         //Set title
@@ -223,6 +236,22 @@ public class ProfileFragment extends Fragment {
                     //if edit phone number is clicked
                     pd.setMessage("Updating your phone number..");
                     namePhoneUpdateDialog("phone");
+                }else if (which == 3) {
+                    //if edit dob is clicked
+                    pd.setMessage("Updating your date of birth..");
+                    namePhoneUpdateDialog("dob");
+                }else if (which == 4) {
+                    //if edit about me information is clicked
+                    pd.setMessage("Updating your information..");
+                    namePhoneUpdateDialog("information");
+                }else if (which == 5) {
+                    //if edit course code is clicked
+                    pd.setMessage("Updating your course code..");
+                    namePhoneUpdateDialog("coursecode");
+                }else if (which == 6) {
+                    //if edit college year is clicked
+                    pd.setMessage("Updating your college year..");
+                    namePhoneUpdateDialog("year");
                 }
             }
         });
@@ -484,7 +513,11 @@ public class ProfileFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
 
+        menu.findItem(R.id.action_create_group).setVisible(false);
         menu.findItem(R.id.action_add_participant).setVisible(false);
+        menu.findItem(R.id.action_create_event).setVisible(false);
+        menu.findItem(R.id.action_search).setVisible(false);
+        menu.findItem(R.id.action_information).setVisible(false);
 
         super.onCreateOptionsMenu(menu, inflater);
     }

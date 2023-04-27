@@ -11,6 +11,7 @@
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
+    <!--For groupchats-->
     <item android:id="@+id/action_create_group"
         android:title="Create group"
         app:showAsAction="always"
@@ -20,5 +21,13 @@
         android:title="Add participant"
         app:showAsAction="always"
         android:icon="@drawable/add_participant" />
+    <item android:id="@+id/action_create_event"
+        android:title="Create event"
+        app:showAsAction="always"
+        android:icon="@drawable/event_icon" />
+    <item android:id="@+id/action_information"
+        android:title="Group information"
+        app:showAsAction="always"
+        android:icon="@drawable/information_icon" />
 
 </menu>

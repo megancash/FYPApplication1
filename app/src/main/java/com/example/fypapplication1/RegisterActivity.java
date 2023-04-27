@@ -28,7 +28,7 @@ import java.util.HashMap;
 public class RegisterActivity extends AppCompatActivity {
 
     //Views
-    EditText mEmailEt, mPasswordEt;
+    EditText mEmailEt, mPasswordEt, mYearEt, mCoursecodeEt;
     Button mRegisterBtn;
     TextView mHaveAccountTv;
 
@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Action bar and its title
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Create Account");
+        actionBar.setTitle("");
         //Enable back button
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
@@ -52,6 +52,9 @@ public class RegisterActivity extends AppCompatActivity {
         //init
         mEmailEt = findViewById(R.id.emailEt);
         mPasswordEt = findViewById(R.id.passwordEt);
+        mYearEt = findViewById(R.id.yearEt);
+        mCoursecodeEt = findViewById(R.id.coursecodeEt);
+
         mRegisterBtn = findViewById(R.id.registerBtn);
         mHaveAccountTv = findViewById(R.id.have_accountTv);
 
@@ -66,6 +69,9 @@ public class RegisterActivity extends AppCompatActivity {
                 //Input email, password
                 String email = mEmailEt.getText().toString().trim();
                 String password = mPasswordEt.getText().toString().trim();
+                String year = mYearEt.getText().toString().trim();
+                String coursecode = mCoursecodeEt.getText().toString().trim();
+
                 //Validate
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     //Set error and focus to email edit text
@@ -114,6 +120,11 @@ public class RegisterActivity extends AppCompatActivity {
                            hashMap.put("onlineStatus", "online");
                            hashMap.put("phone", "");
                            hashMap.put("image", "");
+                           hashMap.put("college year", "");
+                           hashMap.put("coursecode", "");
+                           hashMap.put("dob", "");
+                           hashMap.put("aboutMe", "");
+
 
                            FirebaseDatabase database = FirebaseDatabase.getInstance();
                            //Store user data path
