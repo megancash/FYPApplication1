@@ -3,14 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.FriendsFragment"
-    android:id="@+id/option1">
+    android:background="@drawable/home_background"
+    tools:context=".Fragments.ThursdayFragment">
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/friends_recyclerView"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
-
+        android:layout_height="match_parent" />
 </FrameLayout>

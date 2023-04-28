@@ -16,7 +16,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:background="@color/teal_700">
+                android:background="@drawable/profilebackground">
 
             </RelativeLayout>
 
@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="#7700">
+                    android:background="#303030">
 
                     <TextView
                         android:id="@+id/nameTv"
@@ -69,12 +69,123 @@
                         android:textColor="@color/white"
                         />
 
-
                 </LinearLayout>
 
             </LinearLayout>
+
         </RelativeLayout>
     </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="250dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/coursecodeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Course code:"
+                android:layout_marginLeft="20dp"
+                android:textSize="20dp"
+                android:textStyle="bold">
+            </TextView>
+            <TextView
+                android:id="@+id/coursecodeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Course code"
+                android:layout_marginLeft="20dp"
+                android:textSize="20dp">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/yearTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="College Year:"
+                android:layout_marginLeft="20dp"
+                android:textSize="20dp"
+                android:textStyle="bold">
+            </TextView>
+            <TextView
+                android:id="@+id/yearTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="College year"
+                android:layout_marginLeft="20dp"
+                android:textSize="20dp">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dobTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date of birth:"
+                android:layout_marginLeft="20dp"
+                android:textSize="20dp"
+                android:textStyle="bold">
+            </TextView>
+            <TextView
+                android:id="@+id/dobTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="date of birth"
+                android:layout_marginLeft="20dp"
+                android:textSize="20dp">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/hobbiesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About me:"
+                android:layout_marginLeft="20dp"
+                android:textSize="26dp"
+                android:textStyle="bold">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/aboutmeTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About me"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:lines="5"
+                android:textSize="22dp">
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
 
     <!--Floating action button to edit-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton

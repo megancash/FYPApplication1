@@ -103,13 +103,11 @@
 
                     </TextView>
 
-
-
-
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/groupchatOption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="5dp"
@@ -119,8 +117,7 @@
                 android:focusable="true"
                 android:layout_marginLeft="5dp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="5dp"
-                android:id="@+id/groupchatOption">
+                app:cardElevation="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

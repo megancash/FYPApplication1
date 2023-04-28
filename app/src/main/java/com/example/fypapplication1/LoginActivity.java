@@ -1,3 +1,5 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1;
 
 import androidx.annotation.NonNull;
@@ -29,13 +31,12 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     //Views
-    EditText mEmailEt, mPasswordEt;
-    TextView notHaveAccountTv, mRecoverPassTv;
-    Button mLoginBtn;
-    SignInButton mGoogleLoginBtn;
+    EditText EmailEt, PasswordEt;
+    TextView notHaveAccountTv, RecoverPasswordTv;
+    Button LoginButton;
 
-    //Declare an instance of firebaseAuth
-    private FirebaseAuth mAuth;
+    //Firebase
+    private FirebaseAuth Auth;
 
     //Progress dialog
     ProgressDialog pd;
@@ -52,33 +53,33 @@ public class LoginActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
-        mAuth = FirebaseAuth.getInstance();
+        //Firebase
+        Auth = FirebaseAuth.getInstance();
 
-        //init
-        mEmailEt = findViewById(R.id.emailEt);
-        mPasswordEt = findViewById(R.id.passwordEt);
+        EmailEt = findViewById(R.id.emailEt);
+        PasswordEt = findViewById(R.id.passwordEt);
         notHaveAccountTv = findViewById(R.id.nothave_accountTv);
-        mRecoverPassTv = findViewById(R.id.recoverPassTv);
-        mLoginBtn = findViewById(R.id.loginBtn);
+        RecoverPasswordTv = findViewById(R.id.recoverPasswordTv);
+        LoginButton = findViewById(R.id.loginButton);
 
-        //Login button click
-        mLoginBtn.setOnClickListener(new View.OnClickListener() {
+        //Login Button
+        LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Input data
-                String email = mEmailEt.getText().toString();
-                String passw = mPasswordEt.getText().toString().trim();
+                String email = EmailEt.getText().toString();
+                String password = PasswordEt.getText().toString().trim();
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    //invalid email pattern set error
-                    mEmailEt.setError("Invalid email");
-                    mEmailEt.setFocusable(true);
+                    //Validation if email pattern is incorrect
+                    EmailEt.setError("Error!Invalid email");
+                    EmailEt.setFocusable(true);
                 } else {
-                    //valid email pattern
-                    loginUser(email, passw);
+                    //If the email pattern is correct
+                    loginUser(email, password);
                 }
             }
         });
-        //Not have account
+        //If the user does not have an account, go to register activity
         notHaveAccountTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,8 +87,8 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
-        //recover password
-        mRecoverPassTv.setOnClickListener(new View.OnClickListener() {
+        //Recover users password
+        RecoverPasswordTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showRecoverPasswordDialog();
@@ -102,15 +103,12 @@ public class LoginActivity extends AppCompatActivity {
     private void showRecoverPasswordDialog() {
         //Alertdialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Recover Password");
-        //set linear layout
+        builder.setTitle("Recover your password");
         LinearLayout linearLayout = new LinearLayout(this);
-        //Views to set in dialog
         EditText emailEt = new EditText(this);
         emailEt.setHint("Email");
         emailEt.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 
-        //set min width of a editview to fit a text of n 'M' letters regardless of the actual text extension and text size
         emailEt.setMinEms(16);
 
         linearLayout.addView(emailEt);
@@ -126,29 +124,28 @@ public class LoginActivity extends AppCompatActivity {
                 beginRecovery(email);
             }
         });
-        //Buttons cancel
+        //Cancel
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
-        //show dialog
+        //Show dialog
         builder.create().show();
     }
 
     private void beginRecovery(String email) {
-        //Show progress dialog
-        pd.setMessage("Sending email..");
+        pd.setMessage("Sending the password recovery email..");
         pd.show();
-        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+        Auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 pd.dismiss();
                 if (task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "Email sent", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Email has successfully been sent!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Error! Email failed to send!", Toast.LENGTH_SHORT).show();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -162,22 +159,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void loginUser(String email, String passw) {
+    private void loginUser(String email, String password) {
         //Show progress dialog
         pd.setMessage("Logging in..");
         pd.show();
-        mAuth.signInWithEmailAndPassword(email, passw)
+        Auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             pd.dismiss();
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser user = Auth.getCurrentUser();
                             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                            Toast.makeText(LoginActivity.this, "Authentication successful!", Toast.LENGTH_SHORT).show();
                             finish();
                         }else {
                             pd.dismiss();
-                            Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Error! Authentication Failed", Toast.LENGTH_SHORT).show();
 
                         }
 

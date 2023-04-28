@@ -1,3 +1,5 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1;
 
 import androidx.annotation.NonNull;
@@ -82,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                     mPasswordEt.setError("Invalid password");
                     mPasswordEt.setFocusable(true);
                 } else {
-                    registerUser(email, password); //register
+                    registerUser(email, password, year, coursecode); //register
                 }
             }
         });
@@ -97,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    private void registerUser(String email, String password) {
+    private void registerUser(String email, String password, String year, String coursecode) {
         progressDialog.show();
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -114,14 +116,14 @@ public class RegisterActivity extends AppCompatActivity {
                            //Store user info in a hashmap
                            HashMap<Object, String> hashMap = new HashMap<>();
                            //Put info in a hashmap
-                           hashMap.put("email", email);
+                           hashMap.put("Email", email);
                            hashMap.put("uid", uid);
-                           hashMap.put("name", "");
-                           hashMap.put("onlineStatus", "online");
+                           hashMap.put("Name", "");
+                           hashMap.put("OnlineStatus", "online");
                            hashMap.put("phone", "");
                            hashMap.put("image", "");
-                           hashMap.put("college year", "");
-                           hashMap.put("coursecode", "");
+                           hashMap.put("college year", year);
+                           hashMap.put("coursecode", coursecode);
                            hashMap.put("dob", "");
                            hashMap.put("aboutMe", "");
 

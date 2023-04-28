@@ -1,3 +1,5 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1.Fragments;
 
 import static com.google.firebase.storage.FirebaseStorage.getInstance;
@@ -10,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -72,6 +76,8 @@ public class HomeFragment extends Fragment {
         storageReference = getInstance().getReference(); //Firebase storage reference
 
         //Find views by their ids using findViewById
+        CardView friendsOption = view.findViewById(R.id.friendsOption);
+        CardView groupchatOption = view.findViewById(R.id.groupchatOption);
         CardView accomodationOption = view.findViewById(R.id.accomodationOption);
         CardView toDoOption = view.findViewById(R.id.ToDoOption);
         CardView timetableOption = view.findViewById(R.id.timetableOption);
@@ -80,7 +86,31 @@ public class HomeFragment extends Fragment {
         CardView additionalLinksOption = view.findViewById(R.id.additionalLinksOption);
         nameTv = view.findViewById(R.id.userName);
 
+        //Friends and chat Option
+        friendsOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FriendsFragment friendsFragment = new FriendsFragment();
+                FragmentManager fm = requireActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.content, friendsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
 
+            }
+        });
+        //Groupchat Option
+        groupchatOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GroupChatsFragment groupchatsFragment = new GroupChatsFragment();
+                FragmentManager fm = requireActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.content, groupchatsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
         //Transport Option
        transportOption.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,14 +206,14 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    //Inflate options menu
+    //Inflate the options home menu
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.home_menu, menu);
 
         super.onCreateOptionsMenu(menu, inflater);
     }
-    //Handle menu item clicks
+    //To Handle menu item clicks
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         //get item id

@@ -1,3 +1,5 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1.Models;
 
 public class User {
@@ -9,6 +11,7 @@ public class User {
 
     }
 
+    //Constructor
     public User(String name, String email, String search, String phone, String image, String uid, String year, String coursecode, String dob, String aboutMe){
         this.name = name;
         this.email = email;

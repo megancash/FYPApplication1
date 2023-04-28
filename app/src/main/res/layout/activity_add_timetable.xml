@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/home_background"
+    android:orientation="vertical"
+    tools:context=".CardOptions.TimetableOptions.AddTimetableActivity">
+
+    <EditText
+        android:id="@+id/addModule"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:hint="Module"
+        android:layout_marginBottom="15dp"/>
+    <EditText
+        android:id="@+id/addLecturer"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:hint="Lecturer of the module"
+        android:layout_marginBottom="15dp"/>
+    <EditText
+        android:id="@+id/addRoom"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:hint="Room number"
+        android:layout_marginBottom="15dp"/>
+    <EditText
+        android:id="@+id/addTime"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:hint="The lecture start time"
+        android:layout_marginBottom="15dp"/>
+    <Button
+        android:id="@+id/addButton"
+        android:text="Add to timetable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textSize="20sp"/>
+    <Button
+        android:id="@+id/cancelButton"
+        android:text="Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:textSize="20sp"/>
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

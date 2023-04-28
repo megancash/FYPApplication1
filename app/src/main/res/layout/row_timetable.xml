@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    android:elevation="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/Module"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:text="Module"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/Lecturer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:text="Lecturer"
+            android:layout_below="@+id/Module"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/Room"
+            android:text="Room"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_below="@+id/Lecturer"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/Time"
+            android:text="Time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_below="@+id/Room"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

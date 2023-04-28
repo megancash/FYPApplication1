@@ -1,20 +1,16 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.PopupMenu;
-import android.widget.TextView;
 
-import com.example.fypapplication1.Fragments.ChatListFragment;
 import com.example.fypapplication1.Fragments.FriendsFragment;
 import com.example.fypapplication1.Fragments.GroupChatsFragment;
 import com.example.fypapplication1.Fragments.HomeFragment;
@@ -99,37 +95,11 @@ public class HomeActivity extends AppCompatActivity {
                     }
                     return false;
                 };
-
-              /*private void  showMoreOptions() {
-                  PopupMenu popupMenu = new PopupMenu(HomeActivity.this, navigationView, Gravity.END);
-                  popupMenu.getMenu().add(Menu.NONE, 0,0, "Notifications");
-                  popupMenu.getMenu().add(Menu.NONE, 1,0, "Groupchats");
-
-                  //menu clicks
-                  popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                      @Override
-                      public boolean onMenuItemClick(MenuItem item) {
-                          int id = item.getItemId();
-                          if (id==0) {
-                              //Notifications
-                          }else if (id==1){
-                              //Group chats
-                              actionBar.setTitle("Group chats");
-                              GroupChatsFragment fragment6 = new GroupChatsFragment();
-                              FragmentTransaction ft6 = getSupportFragmentManager().beginTransaction();
-                              ft6.replace(R.id.content, fragment6, "");
-                              ft6.commit();
-                          }
-                          return false;*/
-                  //    }
-                 // });
-
-            //  }
             };
 
 
     private void checkUserStatus() {
-        //get current user
+        //to get the  current user
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
             //User is signed in stay here
