@@ -1,3 +1,5 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1;
 
 import androidx.annotation.NonNull;
@@ -20,12 +22,15 @@ import java.util.ArrayList;
 
 public class AddParticipantsActivity extends AppCompatActivity {
 
+    //Firebase
+    private FirebaseAuth firebaseAuth;
+
     private RecyclerView usersRv;
     private ActionBar actionBar;
-    private FirebaseAuth firebaseAuth;
     private String groupId;
     private String myGroupRole;
 
+    //ArrayList and Adapter
     private ArrayList<User> userList;
     private AdapterParticipantAdd adapterParticipantAdd;
 
@@ -47,16 +52,16 @@ public class AddParticipantsActivity extends AppCompatActivity {
         loadGroupInfo();
 
     }
-    private void getAllUsers(){
+    private void getAllFriends(){
         //list
         userList = new ArrayList<>();
         //load users from db
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userList.clear();
-                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                for (DataSnapshot ds: snapshot.getChildren()){
                     User user = ds.getValue(User.class);
 
                     //get all users accept current user
@@ -102,14 +107,14 @@ public class AddParticipantsActivity extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()) {
                                         myGroupRole = ""+dataSnapshot.child("role").getValue();
-                                        actionBar.setTitle(groupTitle + "("+myGroupRole+")");
+                                        actionBar.setTitle(groupTitle);
 
-                                        getAllUsers();
+                                        getAllFriends();
                                     }
                                 }
 
                                 @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                public void onCancelled(@NonNull DatabaseError error) {
 
                                 }
                             });
@@ -117,7 +122,7 @@ public class AddParticipantsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });

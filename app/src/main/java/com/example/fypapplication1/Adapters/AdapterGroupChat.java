@@ -1,3 +1,5 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1.Adapters;
 
 import android.content.Context;
@@ -31,7 +33,9 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.Hold
     private Context context;
     private ArrayList<GroupChat> groupChatList;
 
+    //Firebase
     private FirebaseAuth firebaseAuth;
+
 
     public AdapterGroupChat(Context context, ArrayList<GroupChat> groupChatList) {
         this.context = context;
@@ -63,14 +67,13 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.Hold
 
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
         try {
-        //set time stamp as dd/mm/yyyy hh:mm
+        //To set the time stamp to correct format
         cal.setTimeInMillis(Long.parseLong(timestamp));
         } catch(NumberFormatException e) {
         }
 
         String dateTime = DateFormat.format("dd/MM/yyyy hh:mm aa", cal).toString();
 
-        //set data
         holder.messageTv.setText(message);
         holder.timeTv.setText(dateTime);
 
@@ -113,6 +116,7 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.Hold
         }
     }
 
+    //HolderGroupChat class
     class HolderGroupChat extends RecyclerView.ViewHolder{
 
         private TextView nameTv, messageTv, timeTv;

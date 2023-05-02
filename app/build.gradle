@@ -7,6 +7,10 @@ android {
     namespace 'com.example.fypapplication1'
     compileSdk 33
 
+    dataBinding {
+        enabled=true
+    }
+
     defaultConfig {
         applicationId "com.example.fypapplication1"
         minSdk 21

@@ -1,3 +1,5 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1.Adapters;
 
 import android.annotation.SuppressLint;
@@ -35,14 +37,20 @@ import java.util.Locale;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
 
+    //Messages
     private static final int MSG_TYPE_SENDER =1;
     private static final int MSG_TYPE_RECEIVER =0;
+
     Context context;
     List<Chat> chatList;
+
+    //For user profile
     String imageUrl;
 
+    //Firebase
     FirebaseUser fUser;
 
+    //Constructor
     public ChatAdapter(Context context, List<Chat> chatsList, String imageUrl) {
         this.context=context;
         this.chatList=chatsList;
@@ -52,7 +60,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        //Inflate sender and receiver layouts
+        //Inflation of message layouts
         if (i==MSG_TYPE_SENDER) {
             View view = LayoutInflater.from(context).inflate(R.layout.row_chat_sender, viewGroup, false);
             return new MyHolder(view);
@@ -64,19 +72,17 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder myHolder, @SuppressLint("RecyclerView") final int i) {
-        //get data
         String message = chatList.get(i).getMessage();
         String timestamp = chatList.get(i).getTimestamp();
 
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
         try {
-            //set time stamp as dd/mm/yyyy hh:mm
+            //set time stamp
             cal.setTimeInMillis(Long.parseLong(timestamp));
         } catch(NumberFormatException e) {
         }
 
         String dateTime = DateFormat.format("dd/MM/yyyy hh:mm aa", cal).toString();
-        //set data
         myHolder.messageTv.setText(message);
         myHolder.timeTv.setText(dateTime);
         try {
@@ -84,7 +90,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
         } catch (Exception e) {
         }
 
-        //Delete pop up screen
         myHolder.messageLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,12 +110,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
                         dialog.dismiss();
                     }
                 });
-                //Display delete dialog
+                //Display the dialog
                 builder.create().show();
             }
         });
 
-        //Set message status
+        //Set the message status
         if (i==chatList.size()-1) {
             if (chatList.get(i).isSeen()){
                 myHolder.isSeenTv.setText("Seen");
@@ -131,15 +136,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyHolder> {
         Query query = dbRef.orderByChild("timestamp").equalTo(msgTimeStamp);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds: dataSnapshot.getChildren()){
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds: snapshot.getChildren()){
                     if (ds.child("sender").getValue().equals(myUID)) {
                         //remove from database path
                         ds.getRef().removeValue();
 
-                        Toast.makeText(context, "Message has been deleted.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "The message has been deleted.", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(context, "You can only delete a message that you have sent.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Error! Could not delete other user's message!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

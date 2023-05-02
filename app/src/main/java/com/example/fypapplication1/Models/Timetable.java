@@ -8,7 +8,6 @@ public class Timetable {
     }
 
     //Constructor
-
     public Timetable(String module, String lecturer, String room, String time) {
         this.module = module;
         this.lecturer = lecturer;

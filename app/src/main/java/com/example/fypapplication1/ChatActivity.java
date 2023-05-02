@@ -1,6 +1,9 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,13 +41,21 @@ import java.util.Locale;
 
 public class ChatActivity extends AppCompatActivity {
 
+    //Sender and receiver messages
+    String hisUid;
+    String hisImage;
+    String myUid;
+
+    //ArrayLists and Adapters
+    List<Chat> chatList;
+    ChatAdapter chatAdapter;
+
     //Views
-    Toolbar toolbar;
     ImageView profileIv;
     RecyclerView recyclerView;
     TextView nameTv, userStatusTv;
     EditText messageEt;
-    ImageButton sendBtn;
+    ImageButton sendButton;
 
     //Firebase
     FirebaseAuth firebaseAuth;
@@ -55,13 +66,6 @@ public class ChatActivity extends AppCompatActivity {
     ValueEventListener seenListener;
     DatabaseReference usersReferenceForSeen;
 
-    List<Chat> chatList;
-    ChatAdapter chatAdapter;
-
-    //Sender and receiver messages
-    String hisUid;
-    String hisImage;
-    String myUid;
 
 
     @Override
@@ -69,26 +73,28 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+
         //init views
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("");
+
         recyclerView = findViewById(R.id.chat_recyclerView);
         profileIv = findViewById(R.id.profileIv);
         nameTv = findViewById(R.id.nameTv);
         userStatusTv = findViewById(R.id.userStatusTv);
         messageEt = findViewById(R.id.messageEt);
-        sendBtn = findViewById(R.id.sendBtn);
+        sendButton = findViewById(R.id.sendButton);
 
-        //RecyclerView linearlayout
+        //Linearlayout
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
 
-        //RecyclerView properties
+        //RecyclerView
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        //For users name to display in the toolbar of the chat screen
+        //For the users name to be displayed in the toolbar of the chat screen
         Intent intent = getIntent();
         hisUid =intent.getStringExtra("hisUid");
 
@@ -98,12 +104,12 @@ public class ChatActivity extends AppCompatActivity {
         usersDatabaseReference = firebaseDatabase.getReference("Users");
 
 
-        //To search a user for their user info
+        //To search a user for their user information
         Query userQuery = usersDatabaseReference.orderByChild("uid").equalTo(hisUid);
         userQuery.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds: dataSnapshot.getChildren()) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds: snapshot.getChildren()) {
                     //get data
                     String name =""+ ds.child("name").getValue();
                     hisImage =""+ ds.child("image").getValue();
@@ -114,9 +120,9 @@ public class ChatActivity extends AppCompatActivity {
                     }
                     else {
                         //set timestamp
-                        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-                        cal.setTimeInMillis(Long.parseLong(onlineStatus));
-                        String dateTime = DateFormat.format("dd/MM/yyyy hh:mm aa", cal).toString();
+                        Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+                        calendar.setTimeInMillis(Long.parseLong(onlineStatus));
+                        String dateTime = DateFormat.format("dd/MM/yyyy hh:mm aa", calendar).toString();
                         userStatusTv.setText("Last seen at "+ dateTime);
 
 
@@ -142,14 +148,14 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        //send message button
-        sendBtn.setOnClickListener(v -> {
+        //Send message Icon button onclick
+        sendButton.setOnClickListener(v -> {
             //retrieve text from edit text
             String message = messageEt.getText().toString().trim();
             //to check if text is empty or not
             if (TextUtils.isEmpty(message)) {
                 //if text is empty
-                Toast.makeText(ChatActivity.this, "Unable to send message", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, "Error! Unable to send your message", Toast.LENGTH_SHORT).show();
             } else {
                 //if text is not empty
                 sendMessage(message);
@@ -162,8 +168,8 @@ public class ChatActivity extends AppCompatActivity {
         usersReferenceForSeen = FirebaseDatabase.getInstance().getReference("Chats");
         seenListener = usersReferenceForSeen.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds: dataSnapshot.getChildren()) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds: snapshot.getChildren()) {
                     Chat chat = ds.getValue(Chat.class);
                     if (chat.getReceiver().equals(myUid) && chat.getSender().equals(hisUid)) {
                         HashMap<String, Object> hasSeenHashMap = new HashMap<>();
@@ -182,8 +188,8 @@ public class ChatActivity extends AppCompatActivity {
 
     private void readMessages() {
         chatList = new ArrayList<>();
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Chats");
-        dbRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Chats");
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 chatList.clear();
@@ -222,33 +228,32 @@ public class ChatActivity extends AppCompatActivity {
         hashMap.put("isSeen", false);
         databaseReference.child("Chats").push().setValue(hashMap);
 
-        //reset text input after user spends a message
+        //Reset the text input after user sends a message within a chat
         messageEt.setText("");
 
-        //ChatList
 
 
     }
 
     private void checkUserStatus() {
-        //get current user
+        //Get current user on the application
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
             //current user
             myUid = user.getUid();
         } else {
-            //user not signed in, go to main activity
+            //user not signed in, go to the main activity
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
     }
 
     private void checkOnlineStatus(String status){
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(myUid);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(myUid);
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("onlineStatus", status);
         //to update online status of the user thats logged in
-        dbRef.updateChildren(hashMap);
+        ref.updateChildren(hashMap);
 
     }
 
@@ -263,10 +268,10 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        //retrieve timestamp
+        //To retrieve the time
         String timestamp = String.valueOf(System.currentTimeMillis());
 
-        //Set status as offline along with timestamp
+        //For when the users have not been online, time stamp will be displayed for when they were last online
         checkOnlineStatus(timestamp);
         usersReferenceForSeen.removeEventListener(seenListener);
     }
@@ -278,9 +283,16 @@ public class ChatActivity extends AppCompatActivity {
         super.onResume();
     }
 
+    //On create Options menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.action_create_group).setVisible(false);
+        menu.findItem(R.id.action_logout).setVisible(false);
+        menu.findItem(R.id.action_search).setVisible(false);
+        menu.findItem(R.id.action_add_participant).setVisible(false);
+        menu.findItem(R.id.action_information).setVisible(false);
+        menu.findItem(R.id.action_create_event).setVisible(false);
 
         //hide search bar
         menu.findItem(R.id.action_search).setVisible(false);
@@ -297,5 +309,10 @@ public class ChatActivity extends AppCompatActivity {
             checkUserStatus();
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
     }
 }

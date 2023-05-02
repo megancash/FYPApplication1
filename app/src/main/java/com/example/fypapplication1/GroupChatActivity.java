@@ -1,9 +1,6 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +14,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.fypapplication1.Adapters.AdapterGroupChat;
+import com.example.fypapplication1.GroupEvent.CreateEventActivity;
+import com.example.fypapplication1.GroupEvent.EventActivity;
 import com.example.fypapplication1.Models.GroupChat;
-import com.example.fypapplication1.Notifications.Data;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +39,7 @@ import java.util.HashMap;
 
 public class GroupChatActivity extends AppCompatActivity {
 
+    //Firebase
     private FirebaseAuth firebaseAuth;
 
     private String groupId, myGroupRole="";
@@ -46,6 +51,7 @@ public class GroupChatActivity extends AppCompatActivity {
     private EditText messageEt;
     private RecyclerView chatRv;
 
+    //ArrayLists and Adapters
     private ArrayList<GroupChat> groupChatList;
     private AdapterGroupChat adapterGroupChat;
 
@@ -53,6 +59,12 @@ public class GroupChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_chat);
+        //Action bar and its title
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("");
+        //Enable back button
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
 
         toolbar = findViewById(R.id.toolbar);
         groupIconIv = findViewById(R.id.groupIconIv);
@@ -62,7 +74,7 @@ public class GroupChatActivity extends AppCompatActivity {
         messageEt =findViewById(R.id.messageEt);
         chatRv= findViewById(R.id.chatRv);
 
-        //setSupportActionBar(toolbar);
+
 
         //to get group id
         Intent intent = getIntent();
@@ -81,7 +93,7 @@ public class GroupChatActivity extends AppCompatActivity {
                 //validate data
                 if (TextUtils.isEmpty(message)) {
                     //If input is empty
-                    Toast.makeText(GroupChatActivity.this, "Cannot send message.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GroupChatActivity.this, "Error! Unable to send message.", Toast.LENGTH_SHORT).show();
                 } else {
                     sendMessage(message);
                 }
@@ -173,8 +185,8 @@ public class GroupChatActivity extends AppCompatActivity {
         ref.orderByChild("groupId").equalTo(groupId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot ds: dataSnapshot.getChildren()) {
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds: snapshot.getChildren()) {
                             String groupTitle = ""+ds.child("groupTitle").getValue();
                             String groupDescription = ""+ds.child("groupDescription").getValue();
                             String groupIcon = ""+ds.child("groupIcon").getValue();
@@ -205,12 +217,13 @@ public class GroupChatActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         menu.findItem(R.id.action_create_group).setVisible(false);
         menu.findItem(R.id.action_logout).setVisible(false);
+        menu.findItem(R.id.action_search).setVisible(false);
+        menu.findItem(R.id.action_create_event).setVisible(true);
+        menu.findItem(R.id.action_information).setVisible(true);
 
         if (myGroupRole.equals("creator") || myGroupRole.equals("admin")){
             //Only admin/creator can add a participant to a group
             menu.findItem(R.id.action_add_participant).setVisible(true);
-        } else {
-            menu.findItem(R.id.action_add_participant).setVisible(false);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -222,7 +235,20 @@ public class GroupChatActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AddParticipantsActivity.class);
             intent.putExtra("groupId", groupId);
             startActivity(intent);
+        } else if (id == R.id.action_create_event) {
+            Intent intent = new Intent(this, CreateEventActivity.class);
+            intent.putExtra("groupId", groupId);
+            startActivity(intent);
+        } else if (id == R.id.action_information) {
+            Intent intent = new Intent(this, GroupInformationActivity.class);
+            intent.putExtra("groupId", groupId);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
     }
 }

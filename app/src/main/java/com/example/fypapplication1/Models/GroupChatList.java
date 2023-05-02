@@ -1,13 +1,17 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1.Models;
 
 public class GroupChatList {
 
     String groupId,groupTitle, groupDescription, groupIcon, timestamp, createdBy;
 
+    //Empty constructor
     public GroupChatList() {
 
     }
 
+    //Constructor
     public GroupChatList(String groupId, String groupTitle, String groupDescription, String groupIcon, String timestamp, String createdBy) {
         this.groupId = groupId;
         this.groupTitle = groupTitle;

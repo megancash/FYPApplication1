@@ -1,3 +1,5 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1.Adapters;
 
 import android.content.Context;
@@ -24,7 +26,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
     Context context;
     List<User> userList;
 
-    //constructor
+    //Constructor
     public AdapterUsers(Context context, List<User> userList) {
         this.context = context;
         this.userList = userList;
@@ -61,7 +63,6 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
 
             @Override
             public void onClick(View v) {
-                //Toast.makeText(context, ""+userEmail, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ChatActivity.class);
                 intent.putExtra("hisUid", hisUID);
                 context.startActivity(intent);

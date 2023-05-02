@@ -7,7 +7,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import com.example.fypapplication1.CardOptions.CalendarOption.AcademicCalendarActivity;
 import com.example.fypapplication1.CardOptions.TransportOptions.GrangegormanActivity;
 import com.example.fypapplication1.R;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,9 +35,9 @@ public class CalendarActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
 
-    Button academicCalendarButton;
+    Button academicCalendarButton, addButton;
     private CalendarView calendarView;
-    private EditText userInput;
+    private TextInputEditText userInput, title, location, description;
     private String inputtedDate;
     private String id;
 
@@ -52,9 +55,37 @@ public class CalendarActivity extends AppCompatActivity {
         academicCalendarButton = findViewById(R.id.academicCalendarButton);
         calendarView = findViewById(R.id.calendarView);
         userInput = findViewById(R.id.userInput);
+        //title = findViewById(R.id.title);
+        //location = findViewById(R.id.location);
+        //description = findViewById(R.id.description);
+        addButton = findViewById(R.id.addButton);
 
+        /*addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!title.getText().toString().isEmpty() && !location.getText().toString().isEmpty()
+                        && !description.getText().toString().isEmpty()) {
+
+                    Intent intent = new Intent(Intent.ACTION_INSERT);
+                    intent.setData(CalendarContract.Events.CONTENT_URI);
+                    intent.putExtra(CalendarContract.Events.TITLE, title.getText().toString());
+                    intent.putExtra(CalendarContract.Events.EVENT_LOCATION, location.getText().toString());
+                    intent.putExtra(CalendarContract.Events.DESCRIPTION, description.getText().toString());
+                    intent.putExtra(CalendarContract.Events.ALL_DAY, true);
+                    if (intent.resolveActivity(getPackageManager()) != null) {
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(CalendarActivity.this, "Error! There is no calendar application on your device to add to", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    Toast.makeText(CalendarActivity.this, "Please add an input to each field", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+*/
         mAuth = FirebaseAuth.getInstance();
-        mUser=mAuth.getCurrentUser();
+        mUser = mAuth.getCurrentUser();
         id = mUser.getUid();
 
         //To allow user to view academic calendar when button is clicked.
@@ -101,8 +132,6 @@ public class CalendarActivity extends AppCompatActivity {
         dbReference.child(inputtedDate).setValue(userInput.getText().toString());
         Toast.makeText(this, "Successfully added to the calendar!", Toast.LENGTH_SHORT).show();
     }
-
-
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

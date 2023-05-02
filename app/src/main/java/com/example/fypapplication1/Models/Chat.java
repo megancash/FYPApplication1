@@ -1,3 +1,5 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1.Models;
 
 import com.google.firebase.database.PropertyName;
@@ -6,10 +8,12 @@ public class Chat {
     String message, receiver, sender, timestamp;
     boolean isSeen;
 
+    //Empty constructor
     public Chat(){
 
     }
 
+    //Constructor
     public Chat(String message, String receiver, String sender, String timestamp, boolean isSeen) {
         this.message = message;
         this.receiver = receiver;
@@ -19,7 +23,6 @@ public class Chat {
     }
 
     //Getter and setter methods
-
     public String getMessage() {
         return message;
     }

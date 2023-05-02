@@ -1,3 +1,5 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1.Adapters;
 
 import android.content.Context;
@@ -31,6 +33,7 @@ public class AdapterGroupChatList extends RecyclerView.Adapter<AdapterGroupChatL
     private Context context;
     private ArrayList<GroupChatList> groupChatLists;
 
+    //Constructor
     public AdapterGroupChatList(Context context, ArrayList<GroupChatList> groupChatLists) {
         this.context=context;
         this.groupChatLists = groupChatLists;
@@ -89,15 +92,13 @@ public class AdapterGroupChatList extends RecyclerView.Adapter<AdapterGroupChatL
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot ds: dataSnapshot.getChildren()) {
 
-                            //get data
                             String message = ""+ds.child("message").getValue();
                             String timestamp = ""+ds.child("timestamp").getValue();
                             String sender = ""+ds.child("sender").getValue();
 
-                            //convert timestamp
                             Calendar cal = Calendar.getInstance(Locale.ENGLISH);
                             try {
-                                //set time stamp as dd/mm/yyyy hh:mm
+                                //set time stamp
                                 cal.setTimeInMillis(Long.parseLong(timestamp));
                             } catch(NumberFormatException e) {
                             }
@@ -107,7 +108,7 @@ public class AdapterGroupChatList extends RecyclerView.Adapter<AdapterGroupChatL
                             holder.messageTv.setText(message);
                             holder.timeTv.setText(dateTime);
 
-                            //get senders information from last message sent in group
+                            //To display senders information from the last message that was sent in to  group
                             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
                             ref.orderByChild("uid").equalTo(sender)
                                     .addValueEventListener(new ValueEventListener() {
@@ -120,25 +121,24 @@ public class AdapterGroupChatList extends RecyclerView.Adapter<AdapterGroupChatL
                                         }
 
                                         @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                        public void onCancelled(@NonNull DatabaseError error) {
                                         }
                                     });
                         }
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError error) {
 
                     }
                 });
     }
-
     @Override
     public int getItemCount() {
         return groupChatLists.size();
     }
 
+    //HolderGroupChatList class
     class HolderGroupChatList extends RecyclerView.ViewHolder{
 
         //views

@@ -1,3 +1,5 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1.Fragments;
 
 import android.content.Intent;
@@ -5,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
@@ -65,6 +69,11 @@ public class GroupChatsFragment extends Fragment {
 
         loadGroupChatsList();
 
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null ) {
+            actionBar.setTitle("Groupchats");
+        }
+
         return view;
     }
 
@@ -76,7 +85,7 @@ public class GroupChatsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 groupChatLists.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    //if current users id exists in participants
+                    //if the current users id exists in participants
                     if (ds.child("Participants").child(firebaseAuth.getUid()).exists()) {
                         GroupChatList model = ds.getValue(GroupChatList.class);
                         groupChatLists.add(model);
@@ -104,7 +113,6 @@ public class GroupChatsFragment extends Fragment {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     //if current users id exists in participants
                     if (ds.child("Participants").child(firebaseAuth.getUid()).exists()) {
-
                         //Search by title of group
                         if (ds.child("groupTitle").toString().toLowerCase().contains(query.toLowerCase())) {
                             GroupChatList model = ds.getValue(GroupChatList.class);
@@ -133,7 +141,11 @@ public class GroupChatsFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
-        
+
+        menu.findItem(R.id.action_add_participant).setVisible(false);
+        menu.findItem(R.id.action_create_event).setVisible(false);
+        menu.findItem(R.id.action_information).setVisible(false);
+
 
 
         //searchview
