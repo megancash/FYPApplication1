@@ -1,3 +1,5 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1.Fragments;
 
 import android.content.Intent;
@@ -5,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
@@ -58,6 +62,10 @@ public class FriendsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_friends, container, false);
 
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+            if (actionBar != null ) {
+                actionBar.setTitle("Friends");
+            }
         firebaseAuth = FirebaseAuth.getInstance();
 
         recyclerView = view.findViewById(R.id.friends_recyclerView);
@@ -167,6 +175,10 @@ public class FriendsFragment extends Fragment {
         inflater.inflate(R.menu.menu_main, menu);
 
         menu.findItem(R.id.action_add_participant).setVisible(false);
+        menu.findItem(R.id.action_create_group).setVisible(false);
+        menu.findItem(R.id.action_create_event).setVisible(false);
+        menu.findItem(R.id.action_information).setVisible(false);
+
 
         //searchview
         MenuItem item = menu.findItem(R.id.action_search);

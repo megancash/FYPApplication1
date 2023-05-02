@@ -7,7 +7,7 @@
     android:gravity="center"
     android:background="@drawable/home_background"
     android:orientation="vertical"
-    tools:context=".CardOptions.TimetableOptions.AddTimetableActivity">
+    tools:context=".CardOptions.TimetableOptions.AddTimetableActivity4">
 
     <EditText
         android:id="@+id/addModule"
@@ -59,5 +59,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:textSize="20sp"/>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

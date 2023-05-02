@@ -7,7 +7,7 @@
     android:gravity="center"
     android:background="@drawable/home_background"
     android:orientation="vertical"
-    tools:context=".CardOptions.TimetableOptions.AddTimetableActivity">
+    tools:context=".CardOptions.TimetableOptions.AddTimetableActivity2">
 
     <EditText
         android:id="@+id/addModule"

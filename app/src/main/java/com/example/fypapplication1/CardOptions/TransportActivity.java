@@ -28,7 +28,7 @@ public class TransportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transport);
         //Action bar and its title
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(" ");
+        actionBar.setTitle("Transport");
         //Enable back button
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);

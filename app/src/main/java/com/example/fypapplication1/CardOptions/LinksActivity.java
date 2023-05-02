@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.fypapplication1.CardOptions.LinkOption.MoodleLoginActivity;
 import com.example.fypapplication1.CardOptions.TransportOptions.AungierStreetActivity;
 import com.example.fypapplication1.CardOptions.TransportOptions.BlanchardstownActivity;
 import com.example.fypapplication1.CardOptions.TransportOptions.BoltonStreetActivity;
@@ -28,7 +29,7 @@ public class LinksActivity extends AppCompatActivity {
 
         //Action bar and its title
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(" ");
+        actionBar.setTitle("Additional Links");
         //Enable back button
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
@@ -52,10 +53,7 @@ public class LinksActivity extends AppCompatActivity {
         option2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* String url = ;
-                Intent i = new Intent (Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);*/
+                startActivity(new Intent(LinksActivity.this, MoodleLoginActivity.class));
             }
         });
         option3.setOnClickListener(new View.OnClickListener() {

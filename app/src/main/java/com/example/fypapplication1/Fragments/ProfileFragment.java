@@ -1,3 +1,5 @@
+//Student Name: Megan Cash
+//Student Number: C19317723
 package com.example.fypapplication1.Fragments;
 
 import static android.app.Activity.RESULT_OK;
@@ -144,7 +146,7 @@ public class ProfileFragment extends Fragment {
                     String phone = ""+ ds.child("phone").getValue();
                     String image = ""+ ds.child("image").getValue();
                     String aboutMe = ""+ ds.child("information").getValue();
-                    String year = ""+ ds.child("year").getValue();
+                    String year = ""+ ds.child("college year").getValue();
                     String coursecode = ""+ ds.child("coursecode").getValue();
                     String dob = ""+ ds.child("dob").getValue();
 

@@ -11,24 +11,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.fypapplication1.CardOptions.ToDoOption.AddTaskActivity;
 import com.example.fypapplication1.MainActivity;
 import com.example.fypapplication1.Models.Timetable;
-import com.example.fypapplication1.Models.ToDo;
 import com.example.fypapplication1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class AddTimetableActivity extends AppCompatActivity {
+public class AddTimetableActivity4 extends AppCompatActivity {
 
     private DatabaseReference reference;
     FirebaseDatabase database;
@@ -45,7 +38,7 @@ public class AddTimetableActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_timetable);
+        setContentView(R.layout.activity_add_timetable4);
 
         //Action bar and its title
         ActionBar actionBar = getSupportActionBar();
@@ -58,7 +51,8 @@ public class AddTimetableActivity extends AppCompatActivity {
         mUser=mAuth.getCurrentUser();
         id = mUser.getUid();
 
-        reference = FirebaseDatabase.getInstance().getReference("Timetable").child("Monday").child(id);
+
+        reference = FirebaseDatabase.getInstance().getReference("Timetable").child("Thursday").child(id);
         addModule=(EditText)findViewById(R.id.addModule);
         addTime=(EditText)findViewById(R.id.addTime);
         addRoom=(EditText)findViewById(R.id.addRoom);
@@ -90,9 +84,9 @@ public class AddTimetableActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful())
-                    Toast.makeText(AddTimetableActivity.this, "Slot added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddTimetableActivity4.this, "Slot added", Toast.LENGTH_SHORT).show();
                 else
-                    Toast.makeText(AddTimetableActivity.this, "Could not add slot!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddTimetableActivity4.this, "Could not add slot!", Toast.LENGTH_SHORT).show();
             }
         });
     }

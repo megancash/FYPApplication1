@@ -1,53 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="5dp"
-    android:elevation="5dp"
+    app:cardElevation="10dp"
+    android:elevation="10dp"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp">
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
-        <TextView
-            android:id="@+id/Module"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:text="Module"
-            android:textColor="@color/black"/>
-        <TextView
-            android:id="@+id/Lecturer"
+            android:paddingBottom="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/ModuleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="Module"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/Module"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginLeft="38dp"
+                android:text="Module"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:text="Lecturer"
-            android:layout_below="@+id/Module"
-            android:textColor="@color/black"/>
-        <TextView
-            android:id="@+id/Room"
-            android:text="Room"
+            android:paddingBottom="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/LecturerTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="Lecturer"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/Lecturer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginLeft="30dp"
+                android:text="Lecturer"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:layout_below="@+id/Lecturer"
-            android:textColor="@color/black"/>
-        <TextView
-            android:id="@+id/Time"
-            android:text="Time"
+            android:paddingBottom="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/RoomTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="Room"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/Room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginLeft="53dp"
+                android:text="Room"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:layout_below="@+id/Room"
-            android:textColor="@color/black"/>
+            android:paddingBottom="5dp"
+            android:orientation="horizontal">
 
-    </RelativeLayout>
-
-
+            <TextView
+                android:id="@+id/TimeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginRight="20dp"
+                android:text="Time"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginLeft="40dp"
+                android:text="Time"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -52,6 +53,9 @@ public class HomeFragment extends Fragment {
     DatabaseReference databaseReference;
     StorageReference storageReference;
 
+    ActionBar actionBar;
+
+
     //Views from XML
     TextView nameTv;
 
@@ -74,6 +78,7 @@ public class HomeFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Users");
         storageReference = getInstance().getReference(); //Firebase storage reference
+
 
         //Find views by their ids using findViewById
         CardView friendsOption = view.findViewById(R.id.friendsOption);

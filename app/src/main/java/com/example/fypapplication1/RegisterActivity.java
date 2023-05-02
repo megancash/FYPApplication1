@@ -30,7 +30,7 @@ import java.util.HashMap;
 public class RegisterActivity extends AppCompatActivity {
 
     //Views
-    EditText mEmailEt, mPasswordEt, mYearEt, mCoursecodeEt;
+    EditText mFullNameEt,mEmailEt, mPasswordEt, mYearEt, mCoursecodeEt;
     Button mRegisterBtn;
     TextView mHaveAccountTv;
 
@@ -52,6 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         //init
+        mFullNameEt = findViewById(R.id.fullNameEt);
         mEmailEt = findViewById(R.id.emailEt);
         mPasswordEt = findViewById(R.id.passwordEt);
         mYearEt = findViewById(R.id.yearEt);
@@ -68,7 +69,8 @@ public class RegisterActivity extends AppCompatActivity {
         mRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Input email, password
+                //Input name, email, college year, course code and password
+                String name = mFullNameEt.getText().toString().trim();
                 String email = mEmailEt.getText().toString().trim();
                 String password = mPasswordEt.getText().toString().trim();
                 String year = mYearEt.getText().toString().trim();
@@ -84,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                     mPasswordEt.setError("Invalid password");
                     mPasswordEt.setFocusable(true);
                 } else {
-                    registerUser(email, password, year, coursecode); //register
+                    registerUser(name, email, password, year, coursecode); //register
                 }
             }
         });
@@ -99,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    private void registerUser(String email, String password, String year, String coursecode) {
+    private void registerUser(String name, String email, String password, String year, String coursecode) {
         progressDialog.show();
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -116,10 +118,10 @@ public class RegisterActivity extends AppCompatActivity {
                            //Store user info in a hashmap
                            HashMap<Object, String> hashMap = new HashMap<>();
                            //Put info in a hashmap
-                           hashMap.put("Email", email);
+                           hashMap.put("email", email);
                            hashMap.put("uid", uid);
-                           hashMap.put("Name", "");
-                           hashMap.put("OnlineStatus", "online");
+                           hashMap.put("name", name);
+                           hashMap.put("onlineStatus", "online");
                            hashMap.put("phone", "");
                            hashMap.put("image", "");
                            hashMap.put("college year", year);

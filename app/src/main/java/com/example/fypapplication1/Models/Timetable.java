@@ -1,7 +1,7 @@
 package com.example.fypapplication1.Models;
 
 public class Timetable {
-    String module, lecturer, room, time, day;
+    String module, lecturer, room, time, day, key;
 
     //Empty constructor
     public Timetable() {
@@ -9,17 +9,25 @@ public class Timetable {
 
     //Constructor
 
-    public Timetable(String module, String lecturer, String room, String time, String day) {
+    public Timetable(String module, String lecturer, String room, String time) {
         this.module = module;
         this.lecturer = lecturer;
         this.room = room;
         this.time = time;
-        this.day = day;
+
     }
 
     //Getter & Setter Methods
     public String getModule() {
         return module;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public void setModule(String module) {

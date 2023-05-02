@@ -25,7 +25,7 @@ public class TimetableActivity extends AppCompatActivity {
 
         //Action bar and its title
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(" ");
+        actionBar.setTitle("Timetable");
         //Enable back button
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);

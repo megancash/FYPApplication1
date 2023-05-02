@@ -10,6 +10,7 @@
     android:layout_margin="10dp">
 
     <LinearLayout
+        android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -59,7 +60,7 @@
                 android:textStyle="bold"
                 android:maxLines="3"/>
             <TextView
-                android:id="@+id/deadline1"
+                android:id="@+id/deadlineTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -68,5 +69,13 @@
                 android:textStyle="bold"
                 android:maxLines="1"/>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/deleteTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="Delete" />
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

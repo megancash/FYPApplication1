@@ -17,13 +17,26 @@
         android:textStyle="bold"
         android:textColor="@color/white"
         android:textSize="44sp" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:id="@+id/EmailTIL">
+        android:id="@+id/FullNameTIL">
+        <EditText
+            android:id="@+id/fullNameEt"
+            android:inputType="textEmailAddress"
+            android:hint="Full Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/EmailTIL"
+        android:layout_below="@id/FullNameTIL">
         <EditText
             android:id="@+id/emailEt"
             android:inputType="textEmailAddress"

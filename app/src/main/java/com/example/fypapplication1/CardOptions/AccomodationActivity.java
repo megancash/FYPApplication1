@@ -22,7 +22,7 @@ public class AccomodationActivity extends AppCompatActivity {
 
         //Action bar and its title
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(" ");
+        actionBar.setTitle("Accommodation");
         //Enable back button
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);

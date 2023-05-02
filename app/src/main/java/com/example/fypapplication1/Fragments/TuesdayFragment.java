@@ -2,67 +2,95 @@
 //Student Number: C19317723
 package com.example.fypapplication1.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import com.example.fypapplication1.Adapters.AdapterTimeTable2;
+import com.example.fypapplication1.CardOptions.TimetableOptions.AddTimetableActivity2;
+import com.example.fypapplication1.Models.Timetable;
 import com.example.fypapplication1.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TuesdayFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class TuesdayFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    //Widgets
+    private FloatingActionButton floatingActionButton;
+    private ProgressBar progress;
+    private DatabaseReference reference;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    //Create instances of the Firebase Database
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
 
-    public TuesdayFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TuesdayFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TuesdayFragment newInstance(String param1, String param2) {
-        TuesdayFragment fragment = new TuesdayFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private String id;
+    RecyclerView recyclerView;
+    AdapterTimeTable2 adapterTimetable2;
+    private ArrayList<Timetable> timetableList2 = new ArrayList<>();
+    FloatingActionButton fab;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tuesday, container, false);
+        View view = inflater.inflate(R.layout.fragment_tuesday, container, false);
+        view.setBackgroundResource(R.drawable.home_background);
+        mAuth = FirebaseAuth.getInstance();
+        recyclerView= view.findViewById(R.id.recyclerView);
+        fab = view.findViewById(R.id.floatingActionButton);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapterTimetable2 = new AdapterTimeTable2(getActivity(), timetableList2, id);
+        recyclerView.setAdapter(adapterTimetable2);
+
+        mUser=mAuth.getCurrentUser();
+        id = mUser.getUid();
+
+        reference = FirebaseDatabase.getInstance().getReference("Timetable").child("Tuesday").child(id);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                timetableList2.clear();
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    Timetable timetable = snapshot1.getValue(Timetable.class);
+                    timetable.setKey(snapshot1.getKey());
+                    timetableList2.add(timetable);
+                }
+                adapterTimetable2.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AddTimetableActivity2.class);
+                startActivity(intent);
+            }
+        });
+        return view;
     }
 }
